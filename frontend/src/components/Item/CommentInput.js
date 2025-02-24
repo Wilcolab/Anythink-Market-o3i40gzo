@@ -13,10 +13,8 @@ function CommentInput({body, currentUser, slug, onSubmit}) {
 
   const createComment = async (ev) => {
     ev.preventDefault();
-    agent.Comments.create(slug, { body }).then((payload) => {
-      onSubmit(payload);
-    });
-    setBody({ body: "" });
+    agent.Comments.create(slug, { body }).then(onSubmit);
+    setBody("");
   };
 
   return (
