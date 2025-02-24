@@ -7,14 +7,16 @@ const mapDispatchToProps = (dispatch) => ({
   onSubmit: (payload) => dispatch({ type: ADD_COMMENT, payload }),
 });
 
-function CommentInput({body, currentUser, slug, onSubmit}) {
+function CommentInput({currentUser, slug, onSubmit}) {
 
-  const [setBody] = useState("");
+  const [body, setBody] = useState("");
 
   const createComment = async (ev) => {
     ev.preventDefault();
-    agent.Comments.create(slug, { body }).then(onSubmit);
-    setBody("");
+    agent.Comments.create(slug, { body }).then((payload) => {
+      onSubmit(payload)
+      setBody("");
+    });
   };
 
   return (
